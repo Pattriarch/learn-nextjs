@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {withLayout} from "../../layout/Layout";
 import {GetStaticPaths, GetStaticProps, GetStaticPropsContext} from "next";
 import axios from "axios";
