@@ -2,21 +2,9 @@
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
-    // webpack(config, options) {
-    //     config.module.rules.push({
-    //         test: /\.svg$/,
-    //         use: [
-    //             {
-    //                 loader: "@svgr/webpack"
-    //             }
-    //         ],
-    //         type: "javascript/auto",
-    //         issuer: {
-    //             and: [/\.(ts|tsx|js|jsx|md|mdx)$/]
-    //         }
-    //     });
-    //     return config;
-    // }
+    images: {
+        domains: ['courses-top.ru']
+    },
     webpack(config, options) {
         config.module.rules.push({
             loader: '@svgr/webpack',

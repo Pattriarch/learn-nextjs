@@ -47,7 +47,7 @@ export interface TopPageModel {
     tags: string[];
     secondCategory: string;
     alias: string;
-    title: string;
+    title?: string;
     category: string;
     seoText?: string;
     tagsTitle: string;
