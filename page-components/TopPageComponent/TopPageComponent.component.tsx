@@ -2,17 +2,21 @@ import {HhData, Htag, Product, Sort, Tag} from "../../components";
 import {TopPageComponentProps} from "./TopPageComponent.props";
 import styles from './TopPageComponent.module.css';
 import {TopLevelCategory} from "../../interfaces/page.interface";
-import {Advantages} from "../../components/Advantage/Advantages";
+import {Advantages} from "../../components";
 import {SortEnum} from "../../components/Sort/Sort.props";
-import {useReducer} from "react";
+import {useEffect, useReducer} from "react";
 import {sortReducer} from "./sort.reducer";
 
 export const TopPageComponent = ({page, products, firstCategory}: TopPageComponentProps): JSX.Element => {
-    const [{products: sortedProducts, sort}, dispatchSort] = useReducer(sortReducer, { products, sort: SortEnum.Rating });
+    const [{sort, products: sortedProducts}, dispatchSort] = useReducer(sortReducer, {sort: SortEnum.Rating, products });
 
     const setSort = (sort: SortEnum) => {
         dispatchSort({ type: sort });
-    }
+    };
+
+    useEffect(() => {
+        dispatchSort({ type: 'reset', initialState: products });
+    }, [products])
 
     return (
         <div className={styles.wrapper}>

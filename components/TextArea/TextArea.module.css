@@ -5,6 +5,7 @@
     background: var(--white);
 
     padding: 7px 15px;
+    width: 100%;
 
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
@@ -16,4 +17,19 @@
 
 .textarea::placeholder {
     color: var(--gray);
+}
+
+.error {
+    border: 1px solid var(--red);
+}
+
+.textareaWrapper {
+    position: relative;
+}
+
+.errorMessage {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    color: var(--red);
 }
