@@ -1,23 +1,37 @@
-import {withLayout} from "../../layout/Layout";
-import {GetStaticPaths, GetStaticProps, GetStaticPropsContext} from "next";
+import { withLayout } from "../../layout/Layout";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import axios from "axios";
-import {TopLevelCategory, TopPageModel} from "../../interfaces/page.interface";
-import {MenuItem} from "../../interfaces/menu.interface";
-import {ParsedUrlQuery} from "querystring";
-import {ProductModel} from "../../interfaces/product.interface";
-import {firstLevelMenu} from "../../helpers/helpers";
-import {TopPageComponent} from "../../page-components";
-import {API} from "../../helpers/api";
-import {useState} from "react";
-import {log} from "util";
+import { TopLevelCategory, TopPageModel } from "../../interfaces/page.interface";
+import { MenuItem } from "../../interfaces/menu.interface";
+import { ParsedUrlQuery } from "querystring";
+import { ProductModel } from "../../interfaces/product.interface";
+import { firstLevelMenu } from "../../helpers/helpers";
+import { TopPageComponent } from "../../page-components";
+import { API } from "../../helpers/api";
+import Head from 'next/head';
+import { Error404 } from "../404";
 
 function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
-    return (
-        <TopPageComponent
-            firstCategory={firstCategory}
-            page={page}
-            products={products}
-        />
+
+    if (!page || !products) {
+        return <Error404/>
+    }
+
+    return (<>
+            <Head>
+                <title>{page.title}</title>
+                <meta name={'description'} content={page.metaDescription}/>
+                <meta property={'og:title'} content={page.metaTitle}/>
+                <meta property={'og:description'} content={page.metaDescription}/>
+                <meta property={'og:url'} content={page.metaDescription}/>
+                <meta property={'og:locale'} content={'ru_RU'}/>
+            </Head>
+            <TopPageComponent
+                firstCategory={firstCategory}
+                page={page}
+                products={products}
+            />
+        </>
     );
 }
 
@@ -50,7 +64,7 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({ params }: G
         };
     }
     try {
-        const {data: menu} = await axios.post<MenuItem[]>(API.topPage.find, {
+        const { data: menu } = await axios.post<MenuItem[]>(API.topPage.find, {
             firstCategory: firstCategoryItem.id
         });
         if (menu.length == 0) {
@@ -58,8 +72,8 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({ params }: G
                 notFound: true
             };
         }
-        const {data: page} = await axios.get<TopPageModel>(API.topPage.byAlias + params.alias);
-        const {data: products} = await axios.post<ProductModel[]>(API.product.find, {
+        const { data: page } = await axios.get<TopPageModel>(API.topPage.byAlias + params.alias);
+        const { data: products } = await axios.post<ProductModel[]>(API.product.find, {
             category: page.category,
             limit: 10
         });

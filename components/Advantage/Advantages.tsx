@@ -1,6 +1,4 @@
 import styles from './Advantages.module.css';
-import { Paragraph } from "../Paragraph/Paragraph";
-import {Htag} from "../Htag/Htag";
 import CheckIcon from './check.svg';
 import {AdvantagesProps} from "./Advantages.props";
 
