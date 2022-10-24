@@ -14,7 +14,7 @@ import { Error404 } from "../404";
 function TopPage({ firstCategory, page, products }: TopPageProps): JSX.Element {
 
     if (!page || !products) {
-        return <Error404/>
+        return <Error404/>;
     }
 
     return (<>

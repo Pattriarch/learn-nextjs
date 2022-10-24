@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import {AppProps} from "next/dist/shared/lib/router/router";
 import Head from 'next/head';
 import ym from 'react-yandex-metrika';
-import Router from 'next/router'
+import Router from 'next/router';
 import { YMInitializer } from 'react-yandex-metrika';
 
 Router.events?.on('routeChangeComplete', (url: string) => {

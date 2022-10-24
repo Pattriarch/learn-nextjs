@@ -5,12 +5,9 @@ import {GetStaticProps} from "next";
 import axios from "axios";
 import {MenuItem} from "../interfaces/menu.interface";
 import {API} from "../helpers/api";
-import Error from 'next/error';
 
 function Home(): JSX.Element {
     const [rating, setRating] = useState<number>(4);
-
-    return <Error statusCode={404}/>
 
     return (
         <>
